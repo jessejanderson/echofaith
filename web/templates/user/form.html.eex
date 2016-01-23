@@ -21,8 +21,13 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :password_digest, "Password digest", class: "control-label" %>
-    <%= text_input f, :password_digest, class: "form-control" %>
+    <%= label f, :pasword, "Password", class: "control-label" %>
+    <%=  password_input f, :password, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :password_confirmation, "Password Confirmation", class: "control-label" %>
+    <%= password_input f, :password_confirmation, class: "form-control" %>
   </div>
 
   <div class="form-group">
