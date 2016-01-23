@@ -3,7 +3,7 @@ defmodule Echofaith.UserTest do
 
   alias Echofaith.User
 
-  @valid_attrs %{email: "some content", password_digest: "some content", username: "some content"}
+  @valid_attrs %{email: "some content", password: "some content", password_confirmation: "some content", username: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
