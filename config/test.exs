@@ -17,3 +17,6 @@ config :echofaith, Echofaith.Repo,
   database: "echofaith_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Faster testing of password encryption
+config :comeonin, bcrypt_log_rounds: 4
