@@ -1,6 +1,9 @@
 # Echofaith
 
-(using http://codetunes.com/2015/phoenix-blog/ for basic setup)
+## Helper Blogs
+
+  * http://codetunes.com/2015/phoenix-blog/
+  * https://medium.com/@diamondgfx/introduction-fe138ac6079d#.d89j58ysh
 
 To start your Phoenix app:
 
