@@ -1,5 +1,7 @@
 # Echofaith
 
+(using http://codetunes.com/2015/phoenix-blog/ for basic setup)
+
 To start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
@@ -17,4 +19,3 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: http://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
-# echofaith
