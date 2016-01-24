@@ -33,4 +33,12 @@ defmodule Echofaith.SessionControllerTest do
     assert get_flash(conn, :error) == "Invalid username/password combination!"
     assert redirected_to(conn) == page_path(conn, :index)
   end
+
+  test "deletes the user session if it exists", %{conn: conn} do
+    user = Repo.get_by(User, %{username: "test"})
+    conn = delete conn, session_path(conn, :delete, user)
+    refute get_session(conn, :current_user)
+    assert get_flash(conn, :info) == "Signed out successfully!"
+    assert redirected_to(conn) == page_path(conn, :index)
+  end
 end
