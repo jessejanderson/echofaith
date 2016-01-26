@@ -88,7 +88,7 @@ defmodule Echofaith.PostController do
 
   def authorize_user(conn, _) do
     user = get_session(conn, :current_user)
-    if user && Integer.to_string(user.id) == connparams["user_id"] do
+    if user && Integer.to_string(user.id) == conn.params["user_id"] do
       conn
     else
       conn
