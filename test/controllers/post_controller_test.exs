@@ -6,8 +6,19 @@ defmodule Echofaith.PostControllerTest do
   @invalid_attrs %{}
 
   setup do
+    {:ok, user} = create_user
     conn = conn()
-    {:ok, conn: conn}
+    |> login_user(user)
+    {:ok, conn: conn, user: user}
+  end
+
+  defp create_user do
+    User.changeset(%User{}, %{email: "test@test.com", username: "test", password: "test", password_confirmation: "test"})
+    |> Repo.insert
+  end
+
+  defp login_user(conn, user) do
+    post conn, session_path(conn, :create), user: %{username: user.username, password: user.password}
   end
 
   test "lists all entries on index", %{conn: conn} do
