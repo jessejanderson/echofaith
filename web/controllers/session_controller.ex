@@ -9,10 +9,13 @@ defmodule Echofaith.SessionController do
     render conn, "new.html", changeset: User.changeset(%User{})
   end
 
-  def create(conn, %{"user" => user_params}) do
-    user = Repo.get_by(User, username: user_params["username"])
-    user
-    |> sign_in(user_params["password"], conn)
+  def create(conn, %{"user" => %{"username" => username, "password" => password}}) do
+    user = Repo.get_by(User, username: username)
+    sign_in(user, password, conn)
+  end
+
+  def create(conn, _) do
+    failed_login(conn)
   end
 
   def delete(conn, _params) do
@@ -22,10 +25,16 @@ defmodule Echofaith.SessionController do
     |> redirect(to: page_path(conn, :index))
   end
 
-  defp sign_in(user, password, conn) when is_nil(user) do
+  defp failed_login(conn) do
     conn
+    |> put_session(:current_user, nil)
     |> put_flash(:error, "Invalid username/password combination!")
     |> redirect(to: page_path(conn, :index))
+    |> halt()
+  end
+
+  defp sign_in(user, _password, conn) when is_nil(user) do
+    failed_login(conn)
   end
 
   defp sign_in(user, password, conn) do
@@ -35,10 +44,7 @@ defmodule Echofaith.SessionController do
       |> put_flash(:info, "Sign in successful!")
       |> redirect(to: page_path(conn, :index))
     else
-      conn
-      |> put_session(:current_user, nil)
-      |> put_flash(:error, "Invalid username/password combination!")
-      |> redirect(to: page_path(conn, :index))
+      failed_login(conn)
     end
   end
 end
