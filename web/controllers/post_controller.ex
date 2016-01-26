@@ -5,6 +5,7 @@ defmodule Echofaith.PostController do
 
   plug :scrub_params, "post" when action in [:create, :update]
   plug :assign_user
+  plug :authorize_user when action in [:new, :create, :update, :edit, :delete]
 
   def index(conn, _params) do
     posts = Repo.all(assoc(conn.assigns[:user], :posts))
@@ -84,4 +85,18 @@ defmodule Echofaith.PostController do
       |> halt()
     end
   end
+
+  def authorize_user(conn, _) do
+    user = get_session(conn, :current_user)
+    if user && Integer.to_string(user.id) == connparams["user_id"] do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorized to modify that post!")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
+    
+  end
+end
 end
