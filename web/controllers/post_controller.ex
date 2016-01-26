@@ -96,7 +96,5 @@ defmodule Echofaith.PostController do
       |> redirect(to: page_path(conn, :index))
       |> halt()
     end
-    
   end
-end
 end
