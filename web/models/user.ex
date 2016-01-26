@@ -3,6 +3,8 @@ defmodule Echofaith.User do
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
   schema "users" do
+    has_many :posts, Echofaith.Post
+
     field :username, :string
     field :email, :string
     field :password_digest, :string

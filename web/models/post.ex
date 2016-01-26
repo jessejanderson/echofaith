@@ -2,6 +2,8 @@ defmodule Echofaith.Post do
   use Echofaith.Web, :model
 
   schema "posts" do
+    belongs_to :user, Echofaith.User
+
     field :title, :string
     field :body, :string
 
