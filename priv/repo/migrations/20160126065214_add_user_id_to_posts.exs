@@ -3,7 +3,7 @@ defmodule Echofaith.Repo.Migrations.AddUserIdToPosts do
 
   def change do
     alter table(:posts) do
-      add :user_id, references(:user)
+      add :user_id, references(:users)
     end
     create index(:posts, [:user_id])
   end
